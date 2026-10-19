@@ -1,0 +1,39 @@
+<section class="tasks">
+  <div class="header">
+    <div>
+      <span class="eyebrow">TASK MANAGER</span>
+      <h1>My Tasks</h1>
+      <p>Manage your daily tasks with Angular.</p>
+    </div>
+
+    <div class="task-count">
+      {{ tasks().length }}
+      <span>tasks</span>
+    </div>
+  </div>
+
+  <div class="add-task">
+    <input
+      type="text"
+      placeholder="What do you need to do?"
+      [(ngModel)]="newTaskTitle"
+    >
+
+    <button 
+      [disabled]="!newTaskTitle.trim()"
+      (click)="addTask()"
+    >
+      + Add Task
+    </button>
+  </div>
+
+  @if(newTaskTitle) {
+    <p>You entered: {{ newTaskTitle }}</p>
+  }
+
+  <div class="task-list">
+    @for (task of tasks(); track task.id) {
+      <app-task-item [task]="task" />
+    }
+  </div>
+</section>
